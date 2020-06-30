@@ -21,30 +21,38 @@ class _MovieListPageState extends State<MovieListPage> {
         title: Text('Movies App'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          // height: MediaQuery.of(context).size.height,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Search',
-                  // labelStyle: TextStyle(
-                  //   color: Theme.of(context).textTheme.headline1.color,
-                  // ),
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Container(
+                height: 40,
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search',
+                    fillColor: Colors.black26,
+                    filled: true,
+                    border: InputBorder.none,
+                    hintStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
+                  showCursor: false,
+                  controller: _controller,
+                  onSubmitted: (typedMovieName) {
+                    if (typedMovieName.isNotEmpty) {
+                      movieSearch.fetchMovies(typedMovieName);
+                      _controller.clear();
+                    }
+                  },
                 ),
-                controller: _controller,
-                onSubmitted: (typedMovieName) {
-                  if (typedMovieName.isNotEmpty) {
-                    movieSearch.fetchMovies(typedMovieName);
-                    _controller.clear();
-                  }
-                },
               ),
-              MovieList(),
-            ],
-          ),
+            ),
+            MovieList(),
+          ],
         ),
       ),
     );

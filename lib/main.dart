@@ -13,6 +13,9 @@ class MovieApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => MovieListViewModel(),
       child: MaterialApp(
+        theme: ThemeData(
+          textSelectionColor: Colors.white,
+        ),
         home: MovieListPage(),
       ),
     );
